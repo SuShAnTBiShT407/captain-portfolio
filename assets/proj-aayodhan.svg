@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="ayBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1014"/>
+      <stop offset="100%" stop-color="#16181d"/>
+    </linearGradient>
+    <pattern id="ayDots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.9" fill="rgba(255,255,255,.07)"/>
+    </pattern>
+    <radialGradient id="ayGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(95,168,255,.18)"/>
+      <stop offset="100%" stop-color="rgba(95,168,255,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#ayBg)"/>
+  <rect width="400" height="300" fill="url(#ayDots)"/>
+  <circle cx="200" cy="150" r="180" fill="url(#ayGlow)"/>
+
+  <!-- map "grid" lines -->
+  <g stroke="rgba(95,168,255,.12)" stroke-width="0.5" fill="none">
+    <path d="M 0 80 Q 100 60 200 100 T 400 90"/>
+    <path d="M 0 140 Q 110 120 200 160 T 400 150"/>
+    <path d="M 0 200 Q 120 180 220 220 T 400 210"/>
+    <path d="M 60 0 Q 80 100 60 200 T 80 300"/>
+    <path d="M 200 0 Q 220 100 200 200 T 220 300"/>
+    <path d="M 340 0 Q 360 100 340 200 T 360 300"/>
+  </g>
+
+  <!-- dashed route -->
+  <path d="M 70 220 C 120 180, 160 230, 200 180 S 280 130, 330 90"
+    fill="none" stroke="#5fa8ff" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round"/>
+
+  <!-- pins -->
+  <g>
+    <!-- start pin -->
+    <g transform="translate(70 220)">
+      <circle r="9" fill="#5fa8ff" opacity="0.25"/>
+      <circle r="5" fill="#5fa8ff" stroke="#0e1014" stroke-width="1.5"/>
+      <text x="0" y="-12" font-family="JetBrains Mono, monospace" font-size="6" text-anchor="middle" fill="#5fa8ff">START</text>
+    </g>
+    <!-- mid pin -->
+    <g transform="translate(200 180)">
+      <circle r="7" fill="#bbff66" opacity="0.25"/>
+      <circle r="4" fill="#bbff66" stroke="#0e1014" stroke-width="1.2"/>
+    </g>
+    <!-- end pin -->
+    <g transform="translate(330 90)">
+      <circle r="12" fill="#ffd966" opacity="0.2"/>
+      <circle r="7" fill="#ffd966" stroke="#0e1014" stroke-width="1.5"/>
+      <text x="0" y="2" font-family="Space Grotesk, sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#0e1014">✓</text>
+      <text x="0" y="-16" font-family="JetBrains Mono, monospace" font-size="6" text-anchor="middle" fill="#ffd966">EVENT</text>
+    </g>
+  </g>
+
+  <!-- floating cards -->
+  <g transform="translate(140 60)">
+    <rect width="120" height="44" rx="6" fill="#16181d" stroke="#22252c" stroke-width="1"/>
+    <circle cx="14" cy="22" r="8" fill="#bbff66"/>
+    <text x="14" y="25" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" fill="#0e1014" font-weight="700">3</text>
+    <text x="28" y="18" font-family="JetBrains Mono, monospace" font-size="7" fill="#e8e9ec">3 travellers nearby</text>
+    <text x="28" y="30" font-family="JetBrains Mono, monospace" font-size="6" fill="#7a7d85">heading to your destination</text>
+    <text x="28" y="40" font-family="JetBrains Mono, monospace" font-size="6" fill="#5fa8ff">join the crew →</text>
+  </g>
+
+  <!-- corner label -->
+  <text x="20" y="30" font-family="JetBrains Mono, monospace" font-size="9" fill="#bbff66" font-weight="700">// aayodhan</text>
+  <text x="20" y="280" font-family="JetBrains Mono, monospace" font-size="8" fill="#7a7d85">trip &amp; event companion</text>
+</svg>

@@ -1,191 +1,308 @@
 /* =====================================================================
-   FROM THE DECK — engine room (kept light & readable)
+   PORTFOLIO  —  engine room
    ===================================================================== */
 (function () {
   "use strict";
   const M = window.MANIFEST;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 
-  /* ---------------- 1. SEA + SKY (background canvas) ---------------- */
-  const cv = $("#sea"), ctx = cv.getContext("2d");
-  let W, H, stars = [], waves = [], t = 0;
-
-  function resize() {
-    W = cv.width = innerWidth; H = cv.height = innerHeight;
-    stars = Array.from({ length: Math.min(160, Math.floor((W * H) / 11000)) }, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H * 0.6,
-      r: Math.random() * 1.4 + 0.2,
-      tw: Math.random() * Math.PI * 2,
-    }));
-    // waves placed near the lower-mid so the deck SVG can sit below them
-    waves = [
-      { y: 0.62, amp: 10, len: 0.012, sp: 0.55, col: "rgba(20,48,65,.55)" },
-      { y: 0.68, amp: 16, len: 0.009, sp: 0.4,  col: "rgba(13,34,54,.7)"  },
-      { y: 0.74, amp: 22, len: 0.007, sp: 0.28, col: "rgba(8,22,40,.9)"   },
-    ];
-  }
-
-  function draw() {
-    t += 0.016;
-    ctx.clearRect(0, 0, W, H);
-
-    // stars (twinkle)
-    for (const s of stars) {
-      const a = 0.4 + Math.sin(t * 2 + s.tw) * 0.4;
-      ctx.globalAlpha = Math.max(0, a);
-      ctx.fillStyle = Math.random() < 0.004 ? "#5fc7c2" : "#f3e6c3";
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 7); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-
-    // moon glow
-    const mx = W * 0.78, my = H * 0.18;
-    const mg = ctx.createRadialGradient(mx, my, 6, mx, my, 140);
-    mg.addColorStop(0, "rgba(230,194,94,.55)");
-    mg.addColorStop(1, "transparent");
-    ctx.fillStyle = mg; ctx.fillRect(mx - 150, my - 150, 300, 300);
-    ctx.fillStyle = "rgba(243,230,195,.92)";
-    ctx.beginPath(); ctx.arc(mx, my, 28, 0, 7); ctx.fill();
-
-    // moon shadow crater
-    ctx.fillStyle = "rgba(15,26,44,.18)";
-    ctx.beginPath(); ctx.arc(mx + 8, my - 4, 22, 0, 7); ctx.fill();
-
-    // horizon glow
-    const hz = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.62);
-    hz.addColorStop(0, "rgba(230,194,94,.08)");
-    hz.addColorStop(1, "transparent");
-    ctx.fillStyle = hz; ctx.fillRect(0, H * 0.55, W, H * 0.07);
-
-    // waves
-    for (const w of waves) {
-      ctx.beginPath(); ctx.moveTo(0, H);
-      for (let x = 0; x <= W; x += 8) {
-        const y = H * w.y
-          + Math.sin(x * w.len + t * w.sp) * w.amp
-          + Math.sin(x * w.len * 2.3 + t * w.sp * 1.7) * (w.amp * 0.35);
-        ctx.lineTo(x, y);
-      }
-      ctx.lineTo(W, H); ctx.closePath();
-      ctx.fillStyle = w.col; ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }
-  addEventListener("resize", resize); resize(); draw();
-
-  /* ---------------- 2. NAME TYPEWRITER (quick, no boot gate) ---------------- */
-  (function typeName() {
-    const el = $("#captainName"); if (!el) return;
-    const full = M.captain.name;
-    let i = 0;
-    (function tn() {
-      if (i <= full.length) {
-        el.innerHTML = full.slice(0, i) + '<span class="cursor">▋</span>';
-        i++; setTimeout(tn, 70);
+  /* ============== HERO: rotating role typewriter ============== */
+  (function rotateRoles() {
+    const el = $("#roleTyped"); if (!el) return;
+    const roles = M.me.roles;
+    let ri = 0, ci = 0, deleting = false;
+    function tick() {
+      const word = roles[ri];
+      if (!deleting) {
+        el.textContent = word.slice(0, ++ci);
+        if (ci === word.length) { deleting = true; return setTimeout(tick, 1600); }
+        return setTimeout(tick, 70 + Math.random() * 40);
       } else {
-        el.innerHTML = full + '<span class="cursor">▋</span>';
+        el.textContent = word.slice(0, --ci);
+        if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; return setTimeout(tick, 280); }
+        return setTimeout(tick, 32);
       }
-    })();
-    $("#captainTitle").textContent = M.captain.title;
-    $("#captainPort").textContent = "⚓ " + M.captain.port;
+    }
+    tick();
   })();
 
-  /* ---------------- 3. RENDER CONTENT ---------------- */
-  $("#creed").textContent = M.captain.creed;
+  $("#heroTagline").textContent = M.me.tagline;
+  $("#metaLoc").textContent = M.me.location;
+  $("#statusText").textContent = M.me.available;
 
-  // voyages
-  $("#voyages-list").innerHTML = M.voyages.map(v => `
-    <article class="voyage">
-      <div class="voyage-top">
-        <div>
-          <span class="voyage-flag">${v.flag}</span>
-          &nbsp;<span class="voyage-ship">${v.ship}</span>
-        </div>
-        <div class="voyage-meta">${v.years} · ${v.port}</div>
-      </div>
-      <ul>${v.log.map(l => `<li>${l}</li>`).join("")}</ul>
-    </article>`).join("");
+  /* ============== HERO: terminal preview card ============== */
+  (function heroTerm() {
+    const body = $("#heroTermBody"); if (!body) return;
+    const lines = [
+      `<span class="c-prompt">~ ❯</span> <span class="c-cmd">whoami</span>`,
+      `<span class="c-out">${esc(M.me.name)}</span>`,
+      `<span class="c-out">${esc(M.me.role)} — ${esc(M.me.location)}</span>`,
+      ``,
+      `<span class="c-prompt">~ ❯</span> <span class="c-cmd">cat ./me.json</span>`,
+      `<span class="c-out">{</span>`,
+      `<span class="c-out">  <span class="c-key">"focus"</span>: <span class="c-val">"payments + AI"</span>,</span>`,
+      `<span class="c-out">  <span class="c-key">"stack"</span>: <span class="c-val">["Haskell","Rust","TS"]</span>,</span>`,
+      `<span class="c-out">  <span class="c-key">"status"</span>: <span class="c-val">"open to chat"</span>,</span>`,
+      `<span class="c-out">  <span class="c-key">"coffee"</span>: <span class="c-val">true</span></span>`,
+      `<span class="c-out">}</span>`,
+      ``,
+      `<span class="c-prompt">~ ❯</span> <span class="c-cmd">./hire-me.sh</span>`,
+      `<span class="c-com"># sending signal...</span>`,
+    ];
+    let i = 0;
+    (function nextLine() {
+      if (i >= lines.length) return;
+      const ln = document.createElement("span");
+      ln.className = "ln";
+      ln.innerHTML = lines[i] || "&nbsp;";
+      body.appendChild(ln);
+      i++;
+      setTimeout(nextLine, lines[i - 1] ? 140 : 60);
+    })();
+  })();
 
-  // bounties
-  $("#bounties-list").innerHTML = M.bounties.map(b => `
-    <article class="bounty">
-      <h3>${b.name}</h3>
-      <div class="tag">${b.tag}</div>
-      <div class="meta">${b.meta || ""}</div>
-      <p>${b.desc}</p>
-      <div class="loot">${b.loot.map(x => `<span>${x}</span>`).join("")}</div>
-      ${b.link ? `<a class="link" href="${b.link}" target="_blank" rel="noopener">${b.linkLabel} ↗</a>` : ""}
-    </article>`).join("");
-
-  // arsenal
-  $("#arsenal-list").innerHTML = Object.entries(M.arsenal).map(([k, v]) => `
-    <div class="rack">
-      <h4>${k}</h4>
-      <div class="chips">${v.map(s => `<span class="chip">${s}</span>`).join("")}</div>
+  /* ============== STATS ============== */
+  $("#heroStats").innerHTML = M.stats.map(s => `
+    <div class="stat">
+      <div class="stat-num">${esc(s.num)}</div>
+      <div class="stat-label">${esc(s.label)}</div>
     </div>`).join("");
 
-  // gallery
-  $("#gallery-list").innerHTML = M.gallery.map((g, i) => `
-    <figure class="plate" data-i="${i}">
-      <img src="${g.src}" alt="${g.caption}" loading="lazy" />
-      <figcaption class="cap">${g.caption}</figcaption>
-    </figure>`).join("");
+  /* ============== ABOUT ============== */
+  $("#aboutBio").textContent = M.me.bio;
 
-  // dispatches
-  $("#dispatch-list").innerHTML = M.dispatches.map(d => `
-    <article class="dispatch">
-      <span class="d-tag">${d.tag}</span>
-      <span class="d-date">${d.date}</span>
-      <h4>${d.title}</h4>
-      <p>${d.excerpt}</p>
-      <a class="d-more" href="${d.link}">read more →</a>
+  /* ============== PROJECTS ============== */
+  $("#projectsList").innerHTML = M.projects.map(p => `
+    <article class="project">
+      <div class="project-thumb">
+        <img src="${esc(p.thumb)}" alt="${esc(p.name)} thumbnail" loading="lazy"/>
+      </div>
+      <div class="project-body">
+        <div class="project-head">
+          <h3 class="project-name">
+            ${esc(p.name)}
+            ${p.live ? `<span class="live-badge">● live</span>` : ""}
+          </h3>
+          <div class="project-meta-row">
+            <span>${esc(p.year)}</span>
+            <span class="dot-sep"></span>
+            <span>${esc(p.meta)}</span>
+          </div>
+        </div>
+        <div class="project-type">${esc(p.type)}</div>
+        <p class="project-desc">${esc(p.desc)}</p>
+        <div class="project-stack">${p.stack.map(s => `<span>${esc(s)}</span>`).join("")}</div>
+        ${p.link ? `<a class="project-link" href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.linkLabel || p.link)} ↗</a>` : ""}
+      </div>
     </article>`).join("");
 
-  // contact links
-  const L = M.captain.links;
-  $("#hail-links").innerHTML = `
-    <a href="mailto:${L.email}">✉ Email</a>
-    <a href="${L.github}" target="_blank" rel="noopener">⌥ GitHub</a>
-    <a href="${L.linkedin}" target="_blank" rel="noopener">⚑ LinkedIn</a>`;
+  /* ============== EXPERIENCE ============== */
+  $("#experienceList").innerHTML = M.experience.map(e => `
+    <article class="exp">
+      <div class="exp-head">
+        <div class="exp-title-row">
+          <span class="exp-company">${esc(e.company)}</span>
+          <span class="exp-role">${esc(e.role)}</span>
+        </div>
+        <div class="exp-meta">
+          ${esc(e.period)}
+          <span class="loc">${esc(e.location)}</span>
+        </div>
+      </div>
+      <ul class="exp-points">
+        ${e.points.map(pt => `<li>${esc(pt)}</li>`).join("")}
+      </ul>
+    </article>`).join("");
+
+  /* ============== SKILLS ============== */
+  $("#skillsList").innerHTML = Object.entries(M.skills).map(([k, v]) => `
+    <div class="skill-rack">
+      <h4>${esc(k)}</h4>
+      <div class="skill-chips">${v.map(s => `<span>${esc(s)}</span>`).join("")}</div>
+    </div>`).join("");
+
+  // tech marquee (duplicate for seamless scroll)
+  const marqueeItems = [...M.marquee, ...M.marquee];
+  $("#marqueeTrack").innerHTML = marqueeItems.map(t => `<span>${esc(t)}</span>`).join("");
+
+  /* ============== CONTACT ============== */
+  $("#emailLink").href = `mailto:${M.me.email}`;
+  $("#emailVal").textContent = M.me.email;
+  $("#githubLink").href = M.me.github;
+  $("#linkedinLink").href = M.me.linkedin;
   $("#year").textContent = new Date().getFullYear();
 
-  /* ---------------- 4. SCROLL REVEAL ---------------- */
+  /* ============== SCROLL REVEAL ============== */
   const io = new IntersectionObserver((es) => es.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add("seen");
-      io.unobserve(e.target);
-    }
-  }), { threshold: 0.12 });
+    if (e.isIntersecting) { e.target.classList.add("seen"); io.unobserve(e.target); }
+  }), { threshold: 0.1 });
   $$(".reveal").forEach(s => io.observe(s));
 
-  /* ---------------- 5. MOBILE MENU ---------------- */
+  /* ============== MOBILE NAV ============== */
   const menuBtn = $("#menuToggle"), nav = $("#navlinks");
   menuBtn.addEventListener("click", () => {
     const open = nav.classList.toggle("open");
     menuBtn.setAttribute("aria-expanded", open);
   });
   $$("#navlinks a").forEach(a => a.addEventListener("click", () => {
-    nav.classList.remove("open");
-    menuBtn.setAttribute("aria-expanded", false);
+    nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", false);
   }));
 
-  /* ---------------- 6. GALLERY LIGHTBOX ---------------- */
-  const lb = document.createElement("div");
-  lb.className = "lightbox";
-  lb.innerHTML = `<img alt=""><p></p>`;
-  document.body.appendChild(lb);
-  $("#gallery-list").addEventListener("click", (e) => {
-    const fig = e.target.closest(".plate"); if (!fig) return;
-    const g = M.gallery[+fig.dataset.i];
-    lb.querySelector("img").src = g.src;
-    lb.querySelector("img").alt = g.caption;
-    lb.querySelector("p").textContent = g.caption;
-    lb.classList.add("open");
+  /* ============== INTERACTIVE TERMINAL ============== */
+  const term = $("#terminal"), body = $("#termBody"), input = $("#termInput");
+  const history = []; let histIdx = 0;
+
+  function print(html, cls = "") {
+    const ln = document.createElement("div");
+    ln.className = "term-line" + (cls ? " " + cls : "");
+    ln.innerHTML = html;
+    body.appendChild(ln);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function banner() {
+    print(`<span class="dim">┌─────────────────────────────────────────────┐</span>`, "dim");
+    print(`<span class="dim">│</span>  <span class="ok">sushant@portfolio</span>  <span class="dim">·</span>  v1.0.0          <span class="dim">│</span>`, "dim");
+    print(`<span class="dim">│</span>  type <span class="ok">help</span> to see what i can do        <span class="dim">│</span>`, "dim");
+    print(`<span class="dim">└─────────────────────────────────────────────┘</span>`, "dim");
+    print("");
+  }
+  banner();
+
+  const COMMANDS = {
+    help: () => [
+      "available commands:",
+      "  <span class='ok'>about</span>        a quick bio",
+      "  <span class='ok'>whoami</span>       who's behind this site",
+      "  <span class='ok'>work</span>         list projects",
+      "  <span class='ok'>experience</span>   list roles",
+      "  <span class='ok'>skills</span>       tech i use",
+      "  <span class='ok'>contact</span>      get in touch",
+      "  <span class='ok'>open &lt;name&gt;</span>  open a section in the page",
+      "  <span class='ok'>visit &lt;site&gt;</span> open external link (amreon, github, linkedin)",
+      "  <span class='ok'>echo &lt;text&gt;</span> echo back",
+      "  <span class='ok'>date</span>         current time",
+      "  <span class='ok'>fortune</span>      a developer fortune",
+      "  <span class='ok'>sudo</span>         try it",
+      "  <span class='ok'>banner</span>       redraw the banner",
+      "  <span class='ok'>clear</span>        clear the screen",
+    ].join("\n"),
+
+    about: () => M.me.bio,
+
+    whoami: () => `${M.me.name} — ${M.me.role}, ${M.me.location}`,
+
+    work: () => M.projects.map(p =>
+      `  <span class="ok">●</span> ${esc(p.name)} <span class="dim">(${esc(p.year)})</span>` +
+      ` — ${esc(p.type)}${p.link ? ` <span class="dim">→ ${esc(p.link)}</span>` : ""}`
+    ).join("\n"),
+
+    experience: () => M.experience.map(e =>
+      `  <span class="ok">●</span> ${esc(e.company)} <span class="dim">(${esc(e.period)})</span>\n     ${esc(e.role)}`
+    ).join("\n"),
+
+    skills: () => Object.entries(M.skills).map(([k, v]) =>
+      `  <span class="ok">${esc(k)}</span>: ${v.map(esc).join(", ")}`
+    ).join("\n"),
+
+    contact: () =>
+      `  <span class="ok">email</span>     ${esc(M.me.email)}\n` +
+      `  <span class="ok">github</span>    ${esc(M.me.github)}\n` +
+      `  <span class="ok">linkedin</span>  ${esc(M.me.linkedin)}`,
+
+    echo: (a) => esc(a || ""),
+
+    date: () => new Date().toString(),
+
+    fortune: () => {
+      const lines = [
+        "ship something today. perfection ships nothing.",
+        "the bug is always in the assumption you didn't check.",
+        "comments lie. tests lie less. types lie least.",
+        "if it's not in git, it doesn't exist.",
+        "the best system is the one that's actually running.",
+        "naming is hard. spend the extra minute.",
+        "logs are a love letter to your future self.",
+      ];
+      return `<span class="ok">🥠</span> ${lines[Math.floor(Math.random() * lines.length)]}`;
+    },
+
+    sudo: () => `<span class="err">[sudo]</span> nice try. this is a portfolio, not a kernel.`,
+
+    banner: () => { body.innerHTML = ""; banner(); return ""; },
+
+    clear: () => { body.innerHTML = ""; return ""; },
+
+    open: (arg) => {
+      const map = {
+        about: "#about", work: "#work", projects: "#work",
+        experience: "#experience", skills: "#skills",
+        contact: "#contact", terminal: "#terminal", top: "#top",
+      };
+      const id = map[(arg || "").toLowerCase()];
+      if (!id) return { html: `<span class="err">no such section: ${esc(arg)}</span>`, raw: true };
+      const tgt = $(id);
+      if (tgt) tgt.scrollIntoView({ behavior: "smooth" });
+      return `→ jumping to ${esc(arg)}…`;
+    },
+
+    visit: (arg) => {
+      const map = {
+        amreon: "https://amreon.com",
+        github: M.me.github,
+        linkedin: M.me.linkedin,
+        email: `mailto:${M.me.email}`,
+      };
+      const url = map[(arg || "").toLowerCase()];
+      if (!url) return { html: `<span class="err">unknown destination: ${esc(arg)}</span>`, raw: true };
+      window.open(url, "_blank", "noopener");
+      return `↗ opening ${esc(arg)}…`;
+    },
+  };
+
+  // aliases
+  COMMANDS.ls = COMMANDS.help;
+  COMMANDS.cd = COMMANDS.open;
+  COMMANDS.cat = (a) => a === "me.json"
+    ? JSON.stringify({ name: M.me.name, role: M.me.role, location: M.me.location, email: M.me.email }, null, 2)
+    : `<span class="err">cat: ${esc(a)}: no such file</span>`;
+  COMMANDS.man = () => COMMANDS.help();
+
+  function run(raw) {
+    if (!raw.trim()) return;
+    history.push(raw); histIdx = history.length;
+    print(
+      `<span class="ok">sushant@portfolio</span> <span class="dim">~ ❯</span> <span class="cmd">${esc(raw)}</span>`
+    );
+    const [c, ...rest] = raw.trim().split(/\s+/);
+    const arg = rest.join(" ");
+    const fn = COMMANDS[c.toLowerCase()];
+    if (!fn) return print(`<span class="err">command not found: ${esc(c)}</span> — try <span class="ok">help</span>`);
+    const out = fn(arg);
+    if (out && typeof out === "object" && out.html) return print(out.html);
+    if (out) print(out);
+  }
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { run(input.value); input.value = ""; return; }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (histIdx > 0) { histIdx--; input.value = history[histIdx] || ""; }
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (histIdx < history.length - 1) { histIdx++; input.value = history[histIdx] || ""; }
+      else { histIdx = history.length; input.value = ""; }
+    }
+    if (e.key === "l" && e.ctrlKey) { e.preventDefault(); body.innerHTML = ""; }
   });
-  lb.addEventListener("click", () => lb.classList.remove("open"));
-  addEventListener("keydown", (e) => {
-    if (e.key === "Escape") lb.classList.remove("open");
+
+  // focus terminal when user clicks anywhere in it
+  term.addEventListener("click", (e) => {
+    if (e.target.closest("a")) return;
+    input.focus();
   });
 })();

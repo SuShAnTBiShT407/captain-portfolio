@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="shBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1014"/>
+      <stop offset="100%" stop-color="#16181d"/>
+    </linearGradient>
+    <pattern id="shDots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.9" fill="rgba(255,255,255,.07)"/>
+    </pattern>
+    <radialGradient id="shGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(255,80,180,.18)"/>
+      <stop offset="100%" stop-color="rgba(255,80,180,0)"/>
+    </radialGradient>
+    <linearGradient id="shCube" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#bbff66"/>
+      <stop offset="100%" stop-color="#5fa8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#shBg)"/>
+  <rect width="400" height="300" fill="url(#shDots)"/>
+  <circle cx="200" cy="150" r="180" fill="url(#shGlow)"/>
+
+  <!-- perspective floor grid -->
+  <g stroke="rgba(187,255,102,.18)" stroke-width="0.5" fill="none">
+    <line x1="0" y1="220" x2="400" y2="220"/>
+    <line x1="0" y1="240" x2="400" y2="240"/>
+    <line x1="0" y1="265" x2="400" y2="265"/>
+    <line x1="0" y1="295" x2="400" y2="295"/>
+    <line x1="200" y1="220" x2="60" y2="295"/>
+    <line x1="200" y1="220" x2="140" y2="295"/>
+    <line x1="200" y1="220" x2="200" y2="295"/>
+    <line x1="200" y1="220" x2="260" y2="295"/>
+    <line x1="200" y1="220" x2="340" y2="295"/>
+  </g>
+
+  <!-- floating cube wireframe -->
+  <g transform="translate(200 130)">
+    <!-- back face -->
+    <polygon points="-35,-35 35,-35 35,35 -35,35" fill="none" stroke="#5fa8ff" stroke-width="1.5" opacity="0.5"/>
+    <!-- offset for 3D -->
+    <polygon points="-20,-50 50,-50 50,20 -20,20" fill="none" stroke="#bbff66" stroke-width="1.5"/>
+    <!-- connecting edges -->
+    <line x1="-35" y1="-35" x2="-20" y2="-50" stroke="#7a7d85" stroke-width="1"/>
+    <line x1="35"  y1="-35" x2="50"  y2="-50" stroke="#7a7d85" stroke-width="1"/>
+    <line x1="35"  y1="35"  x2="50"  y2="20"  stroke="#7a7d85" stroke-width="1"/>
+    <line x1="-35" y1="35"  x2="-20" y2="20"  stroke="#7a7d85" stroke-width="1"/>
+    <!-- vertex dots -->
+    <g fill="#bbff66">
+      <circle cx="-35" cy="-35" r="2.5"/>
+      <circle cx="35" cy="-35" r="2.5"/>
+      <circle cx="35" cy="35" r="2.5"/>
+      <circle cx="-35" cy="35" r="2.5"/>
+      <circle cx="-20" cy="-50" r="2.5"/>
+      <circle cx="50" cy="-50" r="2.5"/>
+      <circle cx="50" cy="20" r="2.5"/>
+      <circle cx="-20" cy="20" r="2.5"/>
+    </g>
+  </g>
+
+  <!-- ai prompt window -->
+  <g transform="translate(40 60)">
+    <rect width="130" height="58" rx="6" fill="#16181d" stroke="#22252c" stroke-width="1"/>
+    <circle cx="8" cy="10" r="2" fill="#ff5f57"/>
+    <circle cx="16" cy="10" r="2" fill="#ffbd2e"/>
+    <circle cx="24" cy="10" r="2" fill="#28c840"/>
+    <text x="10" y="28" font-family="JetBrains Mono, monospace" font-size="6" fill="#bbff66">&gt; render molecule</text>
+    <text x="10" y="40" font-family="JetBrains Mono, monospace" font-size="6" fill="#7a7d85">  in 3d_</text>
+    <text x="10" y="52" font-family="JetBrains Mono, monospace" font-size="6" fill="#ffd966">● generating...</text>
+  </g>
+
+  <!-- floating particles -->
+  <g fill="#bbff66">
+    <circle cx="290" cy="80" r="1.5" opacity="0.8"/>
+    <circle cx="320" cy="110" r="1.2" opacity="0.6"/>
+    <circle cx="270" cy="50" r="1.8" opacity="0.9"/>
+    <circle cx="345" cy="160" r="1.3" opacity="0.5"/>
+  </g>
+  <g fill="#5fa8ff">
+    <circle cx="350" cy="70" r="1.6" opacity="0.7"/>
+    <circle cx="80" cy="200" r="1.4" opacity="0.6"/>
+    <circle cx="60" cy="160" r="1.8" opacity="0.7"/>
+  </g>
+
+  <!-- corner label -->
+  <text x="20" y="30" font-family="JetBrains Mono, monospace" font-size="9" fill="#bbff66" font-weight="700">// shiksha mirage</text>
+  <text x="20" y="280" font-family="JetBrains Mono, monospace" font-size="8" fill="#7a7d85">ar/vr learning · 36h hackathon</text>
+</svg>
