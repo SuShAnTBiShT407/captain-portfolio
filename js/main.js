@@ -62,22 +62,25 @@
     </article>`).join("");
 
   /* ============== EXPERIENCE ============== */
-  $("#experienceList").innerHTML = M.experience.map(e => `
-    <article class="exp">
-      <div class="exp-head">
-        <div class="exp-title-row">
-          <span class="exp-company">${esc(e.company)}</span>
-          <span class="exp-role">${esc(e.role)}</span>
-        </div>
-        <div class="exp-meta">
-          ${esc(e.period)}
-          <span class="loc">${esc(e.location)}</span>
-        </div>
+  $("#experienceList").innerHTML = M.experience.map(e => {
+    const tag = e.link ? "a" : "div";
+    const attrs = e.link ? `href="${esc(e.link)}" target="_blank" rel="noopener"` : "";
+    return `
+    <${tag} class="exp" ${attrs}>
+      <div class="exp-logo">
+        <img src="${esc(e.logo)}" alt="${esc(e.company)} logo"/>
       </div>
-      <ul class="exp-points">
-        ${e.points.map(pt => `<li>${esc(pt)}</li>`).join("")}
-      </ul>
-    </article>`).join("");
+      <div class="exp-info">
+        <span class="exp-company">${esc(e.company)}</span>
+        <span class="exp-role">${esc(e.role)}</span>
+      </div>
+      <div class="exp-meta">
+        <span class="exp-period">${esc(e.period)}</span>
+        <span class="exp-loc">${esc(e.location)}</span>
+      </div>
+      ${e.link ? `<span class="exp-arr">↗</span>` : ""}
+    </${tag}>`;
+  }).join("");
 
   /* ============== SKILLS ============== */
   $("#skillsList").innerHTML = Object.entries(M.skills).map(([k, v]) => `

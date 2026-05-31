@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Sushant Bisht</title>
+  <meta name="description" content="Writings on payments, AI, systems, and shipping software — by Sushant Bisht." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page-sub">
+  <div class="dotgrid" aria-hidden="true"></div>
+  <div class="orb orb-1" aria-hidden="true"></div>
+
+  <header class="topbar" id="topbar">
+    <a class="brand" href="/">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-name">sushant.bisht</span>
+      <span class="brand-slash">/</span>
+      <span class="brand-tag">blog</span>
+    </a>
+    <nav class="navlinks" id="navlinks" aria-label="Primary">
+      <a href="/#about">~/about</a>
+      <a href="/#work">~/work</a>
+      <a href="/#experience">~/experience</a>
+      <a href="/gallery">~/gallery</a>
+      <a href="/blog" class="is-active">~/blog</a>
+      <a href="/#contact" class="nav-cta">say hi <span class="arr">→</span></a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="sub-hero">
+      <div class="sub-hero-grid">
+        <div>
+          <p class="hi-line"><span class="hi-wave">✑</span> dispatches —</p>
+          <h1 class="sub-title">
+            <span class="dot-text">Blog.</span>
+          </h1>
+          <p class="sub-tagline">
+            Things I've been thinking about — payments, AI, systems, and shipping software.
+            Click any post to read inline.
+          </p>
+        </div>
+        <div class="sub-meta">
+          <div class="meta-cell">
+            <span class="meta-label">// posts</span>
+            <span class="meta-val" id="postCount">—</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-label">// rss</span>
+            <span class="meta-val">coming soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sub">
+      <div class="blog-list" id="blogList"></div>
+
+      <p class="add-note">
+        <span class="ok">▸</span> to add a post, append an entry to <code>blog</code> in
+        <code>js/data.js</code> — title, date, tag, excerpt, and HTML <code>content</code>.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-left">
+        <span class="brand-dot"></span>
+        <span>sushant.bisht © <span id="year"></span></span>
+      </div>
+      <div class="footer-right">
+        <span class="footer-meta">designed &amp; built in jetbrains mono</span>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>

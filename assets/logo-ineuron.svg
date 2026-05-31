@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80">
+  <defs>
+    <linearGradient id="inG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff8a3d"/>
+      <stop offset="100%" stop-color="#ffb347"/>
+    </linearGradient>
+  </defs>
+  <g font-family="Inter, system-ui, sans-serif" font-weight="700" letter-spacing="-1">
+    <text x="0" y="56" font-size="48" fill="url(#inG)">i</text>
+    <text x="14" y="56" font-size="48" fill="#ffffff">Neuron</text>
+    <text x="14" y="74" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" fill="#7a7d85" letter-spacing="2">.AI</text>
+  </g>
+</svg>

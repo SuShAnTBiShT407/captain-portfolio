@@ -32,23 +32,16 @@ window.MANIFEST = {
       role: "Software Engineer — Full Stack",
       period: "2023 — Present",
       location: "Bengaluru",
-      points: [
-        "Architected and shipped a production-grade UPI payments SDK for RBL Bank, end-to-end in Haskell & PureScript — cut partner integration effort by 40%.",
-        "Built a context-preserving payment retry engine that recovers failed transactions inside SLA — lifted success rate ~4%, salvaged ~15% of otherwise-lost payments.",
-        "Owned a Fixed Deposit product backend with a two-person team: infra, 20+ APIs, HSM-backed encryption, and a Diffie–Hellman key exchange.",
-        "Built an LLM-powered RCA tool that diagnoses production incidents and pings the right engineer on Slack — ~40% faster recovery, ~70% cheaper than the previous setup.",
-        "Automated PR review and reviewer assignment across 30+ repos (Bitbucket + JIRA via MCP) — ~85% reduction in assignment time.",
-        "Hardened 10+ merchant apps with NDK-level security (Frida / root / .so tamper detection) and authenticated .aar publishing via Maven.",
-      ],
+      logo: "assets/logo-juspay.svg",
+      link: "https://juspay.in",
     },
     {
       company: "iNeuron",
       role: "Machine Learning Intern",
       period: "Jan 2023 — Jun 2023",
       location: "Remote",
-      points: [
-        "Built an end-to-end thyroid disease risk predictor using the CRISP-DM workflow — ~96% accuracy on 9K+ records, served at ~120ms median latency.",
-      ],
+      logo: "assets/logo-ineuron.svg",
+      link: "https://ineuron.ai",
     },
   ],
 
@@ -109,30 +102,118 @@ window.MANIFEST = {
     "PostgreSQL", "Redis", "AWS", "Vercel", "LLMs", "React",
   ],
 
-  writing: [
+  // ---- GALLERY ----
+  // To add a photo: drop the file in /assets/gallery/ and append an entry.
+  // span options: "tall" | "wide" | "square" (controls grid cell size)
+  gallery: [
     {
+      src: "assets/sushant.png",
+      alt: "Sushant Bisht",
+      caption: "self · walking around BLR",
+      meta: "2026",
+      span: "tall",
+    },
+    {
+      src: "assets/gallery/g-workspace.svg",
+      alt: "Workspace at night",
+      caption: "// late-night build session",
+      meta: "home · 2025",
+      span: "wide",
+    },
+    {
+      src: "assets/gallery/g-mountains.svg",
+      alt: "Mountains under stars",
+      caption: "weekend escape · Karnataka hills",
+      meta: "2024",
+      span: "square",
+    },
+    {
+      src: "assets/gallery/g-hackathon.svg",
+      alt: "Hackathon",
+      caption: "Rajasthan IT Hackathon · 36 hours, no sleep",
+      meta: "2023",
+      span: "wide",
+    },
+    {
+      src: "assets/gallery/g-terminal.svg",
+      alt: "Terminal",
+      caption: "// shipped something today",
+      meta: "any day",
+      span: "square",
+    },
+    {
+      src: "assets/gallery/g-coffee.svg",
+      alt: "Coffee",
+      caption: "fuel · before pull requests are merged",
+      meta: "every morning",
+      span: "square",
+    },
+  ],
+
+  // ---- BLOG ----
+  // To add a post: append an entry. The page renders excerpt cards;
+  // `content` (HTML string) is shown inline on expand.
+  blog: [
+    {
+      slug: "securing-the-hull",
       title: "Securing the Hull — HSM & Diffie–Hellman for Payment APIs",
       date: "March 2025",
+      readTime: "6 min read",
       tag: "security",
+      cover: "assets/gallery/g-terminal.svg",
       excerpt:
         "How we sealed 20+ APIs with hardware-backed keys and a fresh key-exchange handshake — without losing a knot of speed.",
-      link: "#",
+      content: `
+        <p>When a payment API touches money, every byte over the wire becomes a target. We re-architected our session bootstrap for a Fixed Deposit product using a hardware security module (HSM) anchored at the bank, with an ephemeral Diffie–Hellman handshake on top.</p>
+        <h3>The threat model</h3>
+        <p>Replays, downgrade attacks, key exfiltration via a compromised app process. The HSM keeps the master key off the host. The handshake gives us forward secrecy for each session.</p>
+        <h3>What we shipped</h3>
+        <ul>
+          <li>20+ APIs sealed with authenticated-encryption envelopes</li>
+          <li>Ephemeral session keys derived inside the HSM enclave</li>
+          <li>Zero loss in p99 latency — &lt; 4ms overhead per call</li>
+        </ul>
+        <p>Full write-up coming soon.</p>
+      `,
     },
     {
+      slug: "llm-in-the-crows-nest",
       title: "An LLM in the Crow's Nest — Automating RCA",
       date: "December 2024",
-      tag: "ai/infra",
+      readTime: "5 min read",
+      tag: "ai · infra",
+      cover: "assets/gallery/g-workspace.svg",
       excerpt:
         "Teaching a language model to read the storm — diagnosing production incidents and paging the right engineer at ~70% lower cost.",
-      link: "#",
+      content: `
+        <p>Our on-call dashboard was great at telling us <em>something was wrong</em> — but not what, or whom to wake up. We wired an LLM into the alert pipeline that reads logs, traces, recent deploys, and PR metadata, then proposes a root cause and tags the owner on Slack.</p>
+        <h3>What surprised us</h3>
+        <p>The model is most useful as a <em>filter</em>, not an oracle. The right framing was: "give us the top 3 candidate causes, ranked, with the snippet of evidence." That kept it honest and fast.</p>
+        <ul>
+          <li>~40% faster median time to first responder</li>
+          <li>~70% cheaper than the heuristic system it replaced</li>
+          <li>Engineers still own the diagnosis — the LLM just sets the table</li>
+        </ul>
+      `,
     },
     {
+      slug: "riding-the-tide",
       title: "Riding the Tide — Recovering Failed Payments Within SLA",
       date: "October 2024",
+      readTime: "4 min read",
       tag: "payments",
+      cover: "assets/gallery/g-mountains.svg",
       excerpt:
         "A context-preserving retry engine that salvages payments the network tried to swallow.",
-      link: "#",
+      content: `
+        <p>Most "retry" systems just hit send again and pray. We built a retry engine that remembers the full transaction context — idempotency keys, partial state, downstream acknowledgements — and replays only the steps that actually failed, inside the SLA window.</p>
+        <h3>Results</h3>
+        <ul>
+          <li>~4% lift in end-to-end success rate</li>
+          <li>~15% of otherwise-lost payments salvaged</li>
+          <li>Zero double-charges (the entire reason for the rebuild)</li>
+        </ul>
+      `,
     },
   ],
 };

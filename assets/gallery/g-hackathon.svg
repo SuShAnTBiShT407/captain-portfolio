@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="hkBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0b0e"/>
+      <stop offset="100%" stop-color="#16181d"/>
+    </linearGradient>
+    <pattern id="hkDots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="rgba(255,255,255,.05)"/>
+    </pattern>
+    <radialGradient id="hkGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="rgba(255,80,80,.18)"/>
+      <stop offset="100%" stop-color="rgba(255,80,80,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#hkBg)"/>
+  <rect width="600" height="400" fill="url(#hkDots)"/>
+  <circle cx="300" cy="180" r="240" fill="url(#hkGlow)"/>
+
+  <!-- sticky notes wall -->
+  <g transform="translate(40 40)">
+    <g transform="rotate(-6)">
+      <rect width="84" height="84" fill="#ffd966" stroke="#a17b1d" stroke-width="1"/>
+      <text x="42" y="40" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" fill="#1a0e07">DAY 1:</text>
+      <text x="42" y="54" font-family="JetBrains Mono, monospace" font-size="7" text-anchor="middle" fill="#1a0e07">ship MVP</text>
+    </g>
+    <g transform="translate(110 14) rotate(3)">
+      <rect width="84" height="84" fill="#5fc7c2" stroke="#3a7c79" stroke-width="1"/>
+      <text x="42" y="42" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" fill="#0a0b0e">3D</text>
+      <text x="42" y="54" font-family="JetBrains Mono, monospace" font-size="6" text-anchor="middle" fill="#0a0b0e">RENDER</text>
+    </g>
+    <g transform="translate(220 0) rotate(-4)">
+      <rect width="84" height="84" fill="#ff8a3d" stroke="#7a2c1c" stroke-width="1"/>
+      <text x="42" y="36" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle" fill="#1a0e07" font-weight="700">36h</text>
+      <text x="42" y="50" font-family="JetBrains Mono, monospace" font-size="6" text-anchor="middle" fill="#1a0e07">NO SLEEP</text>
+      <text x="42" y="62" font-family="JetBrains Mono, monospace" font-size="6" text-anchor="middle" fill="#1a0e07">ALL COFFEE</text>
+    </g>
+    <g transform="translate(330 10) rotate(5)">
+      <rect width="84" height="84" fill="#bbff66" stroke="#7a5e0e" stroke-width="1"/>
+      <text x="42" y="42" font-family="JetBrains Mono, monospace" font-size="7" text-anchor="middle" fill="#0a0b0e">AI →</text>
+      <text x="42" y="54" font-family="JetBrains Mono, monospace" font-size="6" text-anchor="middle" fill="#0a0b0e">SCENE</text>
+    </g>
+  </g>
+
+  <!-- countdown clock -->
+  <g transform="translate(120 260)">
+    <rect x="-90" y="-50" width="180" height="100" rx="10" fill="#04060c" stroke="#bbff66" stroke-width="2"/>
+    <text x="0" y="-20" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" fill="#7a7d85">TIME LEFT</text>
+    <text x="0" y="22" font-family="Space Grotesk, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#bbff66" letter-spacing="2">02:17</text>
+    <text x="0" y="40" font-family="JetBrains Mono, monospace" font-size="7" text-anchor="middle" fill="#7a7d85">until demo</text>
+  </g>
+
+  <!-- whiteboard sketch -->
+  <g transform="translate(330 240)">
+    <rect width="230" height="130" rx="6" fill="#16181d" stroke="#22252c" stroke-width="1"/>
+    <text x="10" y="20" font-family="JetBrains Mono, monospace" font-size="8" fill="#7a7d85">// the plan</text>
+    <!-- boxes connected by arrows -->
+    <g stroke="#bbff66" stroke-width="1.5" fill="none">
+      <rect x="20" y="40" width="46" height="26" rx="3" fill="#0a0b0e"/>
+      <rect x="92" y="40" width="46" height="26" rx="3" fill="#0a0b0e"/>
+      <rect x="164" y="40" width="46" height="26" rx="3" fill="#0a0b0e"/>
+      <line x1="66" y1="53" x2="92" y2="53" marker-end="url(#arr)"/>
+      <line x1="138" y1="53" x2="164" y2="53" marker-end="url(#arr)"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="6" fill="#e8e9ec" text-anchor="middle">
+      <text x="43" y="57">prompt</text>
+      <text x="115" y="57">model</text>
+      <text x="187" y="57">3D scene</text>
+    </g>
+    <!-- bullets -->
+    <g font-family="JetBrains Mono, monospace" font-size="7" fill="#7a7d85">
+      <text x="20" y="86">▸ webgl</text>
+      <text x="20" y="100">▸ websocket</text>
+      <text x="20" y="114">▸ ship by 6am</text>
+    </g>
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M 0 0 L 6 3 L 0 6" fill="none" stroke="#bbff66" stroke-width="1"/>
+      </marker>
+    </defs>
+  </g>
+
+  <!-- title corner -->
+  <text x="20" y="384" font-family="JetBrains Mono, monospace" font-size="9" fill="#7a7d85">RAJASTHAN IT HACKATHON · 2023</text>
+</svg>
