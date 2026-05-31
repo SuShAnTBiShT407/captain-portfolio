@@ -33,44 +33,6 @@
   $("#metaLoc").textContent = M.me.location;
   $("#statusText").textContent = M.me.available;
 
-  /* ============== HERO: terminal preview card ============== */
-  (function heroTerm() {
-    const body = $("#heroTermBody"); if (!body) return;
-    const lines = [
-      `<span class="c-prompt">~ ❯</span> <span class="c-cmd">whoami</span>`,
-      `<span class="c-out">${esc(M.me.name)}</span>`,
-      `<span class="c-out">${esc(M.me.role)} — ${esc(M.me.location)}</span>`,
-      ``,
-      `<span class="c-prompt">~ ❯</span> <span class="c-cmd">cat ./me.json</span>`,
-      `<span class="c-out">{</span>`,
-      `<span class="c-out">  <span class="c-key">"focus"</span>: <span class="c-val">"payments + AI"</span>,</span>`,
-      `<span class="c-out">  <span class="c-key">"stack"</span>: <span class="c-val">["Haskell","Rust","TS"]</span>,</span>`,
-      `<span class="c-out">  <span class="c-key">"status"</span>: <span class="c-val">"open to chat"</span>,</span>`,
-      `<span class="c-out">  <span class="c-key">"coffee"</span>: <span class="c-val">true</span></span>`,
-      `<span class="c-out">}</span>`,
-      ``,
-      `<span class="c-prompt">~ ❯</span> <span class="c-cmd">./hire-me.sh</span>`,
-      `<span class="c-com"># sending signal...</span>`,
-    ];
-    let i = 0;
-    (function nextLine() {
-      if (i >= lines.length) return;
-      const ln = document.createElement("span");
-      ln.className = "ln";
-      ln.innerHTML = lines[i] || "&nbsp;";
-      body.appendChild(ln);
-      i++;
-      setTimeout(nextLine, lines[i - 1] ? 140 : 60);
-    })();
-  })();
-
-  /* ============== STATS ============== */
-  $("#heroStats").innerHTML = M.stats.map(s => `
-    <div class="stat">
-      <div class="stat-num">${esc(s.num)}</div>
-      <div class="stat-label">${esc(s.label)}</div>
-    </div>`).join("");
-
   /* ============== ABOUT ============== */
   $("#aboutBio").textContent = M.me.bio;
 
