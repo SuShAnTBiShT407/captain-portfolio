@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <radialGradient id="g1" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#143041"/>
+      <stop offset="100%" stop-color="#070a0e"/>
+    </radialGradient>
+    <filter id="n1"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/>
+      <feColorMatrix type="saturate" values="0"/></filter>
+  </defs>
+  <rect width="400" height="300" fill="url(#g1)"/>
+  <rect width="400" height="300" fill="#000" opacity="0.04" filter="url(#n1)"/>
+  <rect x="10" y="10" width="380" height="280" fill="none" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+  <text x="200" y="150" font-size="120" text-anchor="middle" dominant-baseline="central" fill="#c9a227" opacity="0.85">⚓</text>
+  <text x="200" y="245" font-size="22" letter-spacing="3" text-anchor="middle" fill="#e9dab5" font-family="Georgia, serif">MAIDEN VOYAGE</text>
+  <text x="28" y="40" font-size="26" fill="#b8482e" font-family="Georgia, serif">I</text>
+  <line x1="40" y1="262" x2="360" y2="262" stroke="#c9a227" stroke-width="0.8" opacity="0.4"/>
+</svg>

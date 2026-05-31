@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sushant Bisht — Logbook of the UPI Seas</title>
+  <meta name="description" content="The salt-stained logbook of Sushant Bisht — full-stack engineer sailing the payment seas with 19th-century grit and 21st-century machinery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=IM+Fell+English:ital@0;1&family=VT323&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <!-- atmospheric layers -->
+  <canvas id="sea" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- BOOT SEQUENCE / mini-terminal -->
+  <div id="boot" class="boot">
+    <div class="boot-inner">
+      <pre id="boot-text" class="boot-text"></pre>
+      <div class="boot-bar"><span id="boot-fill"></span></div>
+      <button id="boot-skip" class="boot-skip">[ press any key / tap to board ]</button>
+    </div>
+  </div>
+
+  <!-- COMPASS NAV -->
+  <nav class="compass" id="compass" aria-label="Primary">
+    <div class="compass-ring">
+      <span class="compass-n">N</span><span class="compass-e">E</span>
+      <span class="compass-s">S</span><span class="compass-w">W</span>
+      <div class="compass-needle" id="needle"></div>
+    </div>
+    <ul class="compass-links">
+      <li><a href="#helm" data-deg="0">The Helm</a></li>
+      <li><a href="#log" data-deg="45">Captain's Log</a></li>
+      <li><a href="#voyages" data-deg="90">Voyages</a></li>
+      <li><a href="#bounties" data-deg="135">Bounties</a></li>
+      <li><a href="#arsenal" data-deg="180">Arsenal</a></li>
+      <li><a href="#hold" data-deg="225">Gallery & Dispatches</a></li>
+      <li><a href="#hail" data-deg="315">Hail the Captain</a></li>
+    </ul>
+  </nav>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle compass">☰</button>
+
+  <main>
+    <!-- ===== HELM / HERO ===== -->
+    <section id="helm" class="helm">
+      <div class="ship" aria-hidden="true">
+        <svg viewBox="0 0 200 120" class="ship-svg">
+          <path class="hull" d="M20 80 Q100 110 180 80 L165 95 Q100 118 35 95 Z"/>
+          <rect class="mast" x="97" y="10" width="6" height="75"/>
+          <path class="sail" d="M100 16 Q150 32 100 70 Z"/>
+          <path class="sail2" d="M100 16 Q52 32 100 70 Z"/>
+          <circle class="flag-dot" cx="100" cy="10" r="4"/>
+        </svg>
+      </div>
+      <div class="helm-plate">
+        <p class="eyebrow">— Logbook of a Steam-Age Privateer —</p>
+        <h1 class="captain-name" id="captainName"></h1>
+        <p class="captain-title" id="captainTitle"></p>
+        <p class="captain-port" id="captainPort"></p>
+        <div class="helm-cta">
+          <a href="#log" class="btn btn-brass">Open the Logbook</a>
+          <button id="fireBtn" class="btn btn-rust">🔥 Fire the Cannon</button>
+        </div>
+        <p class="hint" id="cannonHint">find <strong>5</strong> hidden doubloons across the deck · <span id="dblCount">0</span>/5</p>
+      </div>
+      <div class="scroll-cue" aria-hidden="true">▾ chart a course ▾</div>
+    </section>
+
+    <!-- ===== CAPTAIN'S LOG / ABOUT ===== -->
+    <section id="log" class="port reveal">
+      <header class="port-head"><span class="port-no">I</span><h2>Captain's Log</h2></header>
+      <div class="parchment">
+        <p class="creed" id="creed"></p>
+        <div class="seal" aria-hidden="true">⚓</div>
+      </div>
+    </section>
+
+    <!-- ===== VOYAGES / EXPERIENCE ===== -->
+    <section id="voyages" class="port reveal">
+      <header class="port-head"><span class="port-no">II</span><h2>Voyages Undertaken</h2></header>
+      <div class="voyages" id="voyages-list"></div>
+    </section>
+
+    <!-- ===== BOUNTIES / PROJECTS ===== -->
+    <section id="bounties" class="port reveal">
+      <header class="port-head"><span class="port-no">III</span><h2>Bounties Claimed</h2></header>
+      <div class="bounties" id="bounties-list"></div>
+    </section>
+
+    <!-- ===== ARSENAL / SKILLS ===== -->
+    <section id="arsenal" class="port reveal">
+      <header class="port-head"><span class="port-no">IV</span><h2>The Arsenal</h2></header>
+      <div class="arsenal" id="arsenal-list"></div>
+    </section>
+
+    <!-- ===== THE HOLD: GALLERY + DISPATCHES (two columns) ===== -->
+    <section id="hold" class="port reveal">
+      <header class="port-head"><span class="port-no">V</span><h2>The Ship's Hold</h2></header>
+      <div class="hold-grid">
+        <div class="hold-col gallery-col">
+          <h3 class="col-title">⌖ The Gallery</h3>
+          <p class="col-sub">A logbook of the journey — plates &amp; portraits.</p>
+          <div class="gallery" id="gallery-list"></div>
+        </div>
+        <div class="hold-col dispatch-col">
+          <h3 class="col-title">✑ Dispatches</h3>
+          <p class="col-sub">Messages in bottles — writings from the deck.</p>
+          <div class="dispatches" id="dispatch-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HAIL / CONTACT ===== -->
+    <section id="hail" class="port reveal">
+      <header class="port-head"><span class="port-no">VI</span><h2>Hail the Captain</h2></header>
+      <div class="hail-box">
+        <p>Signal flags up. Send word by raven, wire, or telegraph.</p>
+        <div class="hail-links" id="hail-links"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Charted &amp; rigged by the Captain · <span id="year"></span></p>
+      <p class="footer-tiny">Type <code>help</code> in the terminal below to issue orders.</p>
+    </footer>
+  </main>
+
+  <!-- LIVE TERMINAL (mini text-adventure) -->
+  <div class="terminal-dock" id="termDock">
+    <button class="term-handle" id="termHandle">▣ ship's console</button>
+    <div class="terminal" id="terminal" aria-hidden="true">
+      <div class="term-body" id="termBody"></div>
+      <div class="term-input-row">
+        <span class="term-prompt">captain@deck:~$</span>
+        <input id="termInput" class="term-input" autocomplete="off" spellcheck="false" aria-label="terminal input" />
+      </div>
+    </div>
+  </div>
+
+  <!-- cannonball overlay -->
+  <div id="cannonLayer" class="cannon-layer" aria-hidden="true"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
