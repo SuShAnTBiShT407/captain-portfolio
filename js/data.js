@@ -5,11 +5,11 @@
 window.MANIFEST = {
   captain: {
     name: "Sushant Bisht",
-    title: "Full-Stack Buccaneer of the UPI Seas",
-    rank: "Software Engineer · Juspay",
+    title: "Full-Stack Engineer · Builder · Explorer",
+    rank: "Software Engineer at Juspay",
     port: "Bengaluru, India",
     creed:
-      "A full-stack engineer who builds bank-grade machinery on the high seas of India's payment rails — Haskell, PureScript & Rust below decks, advanced contraptions above. I sail solo when I must and command a crew when the prize is worth it.",
+      "I'm a software engineer who builds at the intersection of payments, AI, and product. By day I ship bank-grade systems at Juspay — Haskell, PureScript, Rust, the whole rigging. Off-hours I tinker on health-tech, learning tools, and whatever hard problem catches my eye. Give me a tough challenge and a clean whiteboard, and I'll start drawing the map.",
     links: {
       email: "bishtsushant1649@gmail.com",
       github: "https://github.com/SuShAnTBiShT407",
@@ -20,28 +20,26 @@ window.MANIFEST = {
   // ---- VOYAGES (experience) ----
   voyages: [
     {
-      flag: "JUSPAY",
-      ship: "Software Engineer — Full Stack / UPI",
-      years: "Jun 1823 – Present", // 19th-century flavour; real-world: 2023–
-      realYears: "2023 – Present",
+      flag: "Juspay",
+      ship: "Software Engineer — Full Stack",
+      years: "2023 — Present",
       port: "Bengaluru",
       log: [
-        "Architected & shipped a production-grade UPI payments SDK for RBL Bank end-to-end in Haskell & PureScript — cut integration effort by 40%.",
-        "Engineered a context-preserving payment-retry engine that recovers failed transactions within the tide (SLA) — lifted success rate ~4%, salvaged ~15% of otherwise-lost payments.",
-        "Commanded the full backend of a Fixed Deposit product (2-soul crew): infra, 20+ APIs sealed with HSM encryption & a Diffie–Hellman key exchange.",
-        "Built an LLM-powered automated RCA spyglass that diagnoses production storms and tags the right crew on Slack — ~40% faster to calm, ~70% cheaper.",
-        "Automated PR review & reviewer-assignment across 30+ repositories (Bitbucket + JIRA via MCP) — assignment time cut ~85%.",
-        "Hardened 10+ merchant vessels with an NDK security hull (Frida / root / .so tamper detection) and sealed .aar cargo via authenticated Maven.",
+        "Architected and shipped a production-grade UPI payments SDK for RBL Bank, end-to-end in Haskell & PureScript — cut partner integration effort by 40%.",
+        "Built a context-preserving payment retry engine that recovers failed transactions inside SLA — lifted success rate ~4%, salvaged ~15% of otherwise-lost payments.",
+        "Owned a Fixed Deposit product backend with a two-person team: infra, 20+ APIs, HSM-backed encryption, and a Diffie–Hellman key exchange.",
+        "Built an LLM-powered RCA tool that diagnoses production incidents and pings the right engineer on Slack — ~40% faster recovery, ~70% cheaper than the previous setup.",
+        "Automated PR review and reviewer assignment across 30+ repos (Bitbucket + JIRA via MCP) — ~85% reduction in assignment time.",
+        "Hardened 10+ merchant apps with NDK-level security (Frida / root / .so tamper detection) and authenticated .aar publishing via Maven.",
       ],
     },
     {
-      flag: "iNEURON",
-      ship: "Machine Learning Privateer (Intern)",
-      years: "Jan 1823 – Jun 1823",
-      realYears: "2023",
-      port: "Remote / Open Waters",
+      flag: "iNeuron",
+      ship: "Machine Learning Intern",
+      years: "Jan 2023 — Jun 2023",
+      port: "Remote",
       log: [
-        "Built an end-to-end thyroid-disease risk-prediction apparatus (CRISP-DM) — ~96% accuracy across 9K+ souls, served at ~120ms median.",
+        "Built an end-to-end thyroid disease risk predictor using the CRISP-DM workflow — ~96% accuracy on 9K+ records, served at ~120ms median latency.",
       ],
     },
   ],
@@ -50,78 +48,77 @@ window.MANIFEST = {
   bounties: [
     {
       name: "Amreon",
-      tag: "AI Health-Tracking Vessel",
-      doubloons: "~50 souls aboard",
+      tag: "AI Health-Tracking Platform",
+      meta: "Solo build · Live",
       link: "https://amreon.com",
       linkLabel: "amreon.com",
       desc:
-        "Designed the entire stack alone — data model, auth, REST cannons, and an LLM oracle for personalised health insight — then launched on Vercel with Meta Business rigging. Captained the whole voyage from zero to live.",
-      loot: ["Solo build", "LLM oracle", "Vercel", "Live"],
+        "Designed the entire stack alone — data model, auth, REST APIs, and an LLM-powered insight engine for personalised health guidance. Launched on Vercel with Meta Business integration; took it from blank canvas to live product with ~50 active users.",
+      loot: ["LLM", "Next.js", "Vercel", "Live"],
     },
     {
       name: "Aayodhan",
       tag: "Trip & Event Companion",
-      doubloons: "Flutter-forged",
+      meta: "Flutter · Cross-platform",
       link: "",
       linkLabel: "",
       desc:
-        "Real-time matching of crews and quests, forged in Flutter — cross-platform state-craft and backend sync so wanderers can muster, discover, and join expeditions on the fly.",
-      loot: ["Flutter", "Realtime", "Cross-platform"],
+        "Real-time matching of travellers and events, built in Flutter — cross-platform state management with backend sync so people can find a crew, discover happenings, and join expeditions on the fly.",
+      loot: ["Flutter", "Realtime", "Mobile"],
     },
     {
       name: "Shiksha Mirage",
       tag: "Immersive AI Learning",
-      doubloons: "36-hour conquest",
+      meta: "36-hour Hackathon",
       link: "https://youtu.be/zrZv5UOCkTI?si=rm2dEcPwWyQCiuf2",
-      linkLabel: "Watch the Dispatch",
+      linkLabel: "Watch the demo",
       desc:
-        "Engineered real-time AR/VR concept-rendering under a 36-hour siege at the Rajasthan IT Hackathon — wiring AI-conjured scenes into interactive 3D learning mirages.",
+        "Built a real-time AR/VR concept renderer under a 36-hour run at the Rajasthan IT Hackathon — wiring AI-generated scenes into interactive 3D learning environments.",
       loot: ["AR/VR", "Hackathon", "AI", "3D"],
     },
   ],
 
   // ---- ARSENAL (skills) ----
   arsenal: {
-    Tongues: ["Haskell", "PureScript", "Python", "JavaScript", "Dart", "Java", "C++", "Rust"],
-    Rigging: ["Presto-DOM", "Flutter", "Axum"],
-    "Cargo & Seas": ["AWS", "GCP", "PostgreSQL", "Cassandra", "ClickHouse", "Redis", "HSM"],
-    Instruments: ["Git", "Bitbucket", "JIRA", "MCP", "LLMs", "Selenium", "Figma", "Vercel"],
+    Languages: ["Haskell", "PureScript", "Python", "JavaScript", "TypeScript", "Dart", "Java", "C++", "Rust"],
+    Frameworks: ["Presto-DOM", "Flutter", "Next.js", "Axum", "React"],
+    "Infra & Data": ["AWS", "GCP", "PostgreSQL", "Cassandra", "ClickHouse", "Redis", "HSM"],
+    Tools: ["Git", "Bitbucket", "JIRA", "MCP", "LLMs", "Selenium", "Figma", "Vercel"],
   },
 
-  // ---- THE GALLERY (journey log) ----
-  // Drop your own images into /assets and point `src` at them.
+  // ---- THE GALLERY ----
   gallery: [
-    { src: "assets/plate-01.svg", caption: "Maiden voyage — first commit to the high seas" },
+    { src: "assets/plate-01.svg", caption: "Late-night code — where most ideas take shape" },
     { src: "assets/plate-02.svg", caption: "Global Fintech Fest — Tap-N-Pay unveiled" },
     { src: "assets/plate-03.svg", caption: "Rajasthan Hackathon — 36 hours, no sleep" },
-    { src: "assets/plate-04.svg", caption: "Amreon launch day" },
-    { src: "assets/plate-05.svg", caption: "The crew at port" },
-    { src: "assets/plate-06.svg", caption: "Add your own plate here →" },
+    { src: "assets/plate-04.svg", caption: "Amreon — launch day" },
+    { src: "assets/plate-05.svg", caption: "Mountains over Bengaluru" },
+    { src: "assets/plate-06.svg", caption: "Add your own moment →" },
   ],
 
-  // ---- DISPATCHES (blog) ----
+  // ---- DISPATCHES (writing) ----
   dispatches: [
     {
-      title: "Securing the Hull: HSM & Diffie–Hellman for Payment APIs",
-      date: "Spring, 1826",
+      title: "Securing the Hull — HSM & Diffie–Hellman for Payment APIs",
+      date: "March 2025",
       excerpt:
-        "How we sealed 20+ APIs with hardware-backed keys and a key-exchange handshake — without losing a knot of speed.",
+        "How we sealed 20+ APIs with hardware-backed keys and a fresh key-exchange handshake — without losing a knot of speed.",
       link: "#",
       tag: "Security",
     },
     {
-      title: "An LLM in the Crow's Nest: Automating Root-Cause Analysis",
-      date: "Winter, 1825",
+      title: "An LLM in the Crow's Nest — Automating RCA",
+      date: "December 2024",
       excerpt:
-        "Teaching a language model to read the storm — diagnosing production incidents and hailing the right crew, for 70% less coin.",
+        "Teaching a language model to read the storm — diagnosing production incidents and paging the right engineer at ~70% lower cost.",
       link: "#",
       tag: "AI / Infra",
     },
     {
-      title: "Retrying the Tide: Recovering Failed Payments Within SLA",
-      date: "Autumn, 1825",
+      title: "Riding the Tide — Recovering Failed Payments Within SLA",
+      date: "October 2024",
       excerpt:
-        "A context-preserving retry engine that salvages payments the sea tried to swallow.",
+        "A context-preserving retry engine that salvages payments the network tried to swallow.",
       link: "#",
       tag: "Payments",
     },

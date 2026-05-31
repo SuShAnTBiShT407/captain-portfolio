@@ -3,148 +3,278 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sushant Bisht — Logbook of the UPI Seas</title>
-  <meta name="description" content="The salt-stained logbook of Sushant Bisht — full-stack engineer sailing the payment seas with 19th-century grit and 21st-century machinery." />
+  <title>Sushant Bisht — From the Deck</title>
+  <meta name="description" content="Portfolio of Sushant Bisht — full-stack engineer building at the intersection of payments, AI, and product." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=IM+Fell+English:ital@0;1&family=VT323&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Pirata+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 </head>
 <body>
-  <!-- atmospheric layers -->
+  <!-- atmospheric sea + sky behind everything -->
   <canvas id="sea" aria-hidden="true"></canvas>
   <div class="vignette" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
 
-  <!-- BOOT SEQUENCE / mini-terminal -->
-  <div id="boot" class="boot">
-    <div class="boot-inner">
-      <pre id="boot-text" class="boot-text"></pre>
-      <div class="boot-bar"><span id="boot-fill"></span></div>
-      <button id="boot-skip" class="boot-skip">[ press any key / tap to board ]</button>
-    </div>
-  </div>
+  <!-- ===== TOP NAV ===== -->
+  <header class="topbar" id="topbar">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">⚓</span>
+      <span class="brand-name">Sushant Bisht</span>
+    </a>
+    <nav class="navlinks" id="navlinks" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#log">Gallery</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </header>
 
-  <!-- COMPASS NAV -->
-  <nav class="compass" id="compass" aria-label="Primary">
-    <div class="compass-ring">
-      <span class="compass-n">N</span><span class="compass-e">E</span>
-      <span class="compass-s">S</span><span class="compass-w">W</span>
-      <div class="compass-needle" id="needle"></div>
-    </div>
-    <ul class="compass-links">
-      <li><a href="#helm" data-deg="0">The Helm</a></li>
-      <li><a href="#log" data-deg="45">Captain's Log</a></li>
-      <li><a href="#voyages" data-deg="90">Voyages</a></li>
-      <li><a href="#bounties" data-deg="135">Bounties</a></li>
-      <li><a href="#arsenal" data-deg="180">Arsenal</a></li>
-      <li><a href="#hold" data-deg="225">Gallery & Dispatches</a></li>
-      <li><a href="#hail" data-deg="315">Hail the Captain</a></li>
-    </ul>
-  </nav>
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle compass">☰</button>
+  <main id="top">
 
-  <main>
-    <!-- ===== HELM / HERO ===== -->
-    <section id="helm" class="helm">
-      <div class="ship" aria-hidden="true">
-        <svg viewBox="0 0 200 120" class="ship-svg">
-          <path class="hull" d="M20 80 Q100 110 180 80 L165 95 Q100 118 35 95 Z"/>
-          <rect class="mast" x="97" y="10" width="6" height="75"/>
-          <path class="sail" d="M100 16 Q150 32 100 70 Z"/>
-          <path class="sail2" d="M100 16 Q52 32 100 70 Z"/>
-          <circle class="flag-dot" cx="100" cy="10" r="4"/>
+    <!-- ===== HERO / SHIP DECK ===== -->
+    <section id="hero" class="hero">
+      <!-- ship deck illustration (railing + wheel + planks) -->
+      <div class="deck-scene" aria-hidden="true">
+        <svg class="deck-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <linearGradient id="plank" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4a2f17"/>
+              <stop offset="60%" stop-color="#2c1a09"/>
+              <stop offset="100%" stop-color="#170c04"/>
+            </linearGradient>
+            <linearGradient id="plankLight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#664021"/>
+              <stop offset="100%" stop-color="#33200e"/>
+            </linearGradient>
+            <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f3d36c"/>
+              <stop offset="50%" stop-color="#c9a227"/>
+              <stop offset="100%" stop-color="#7a5e0e"/>
+            </linearGradient>
+            <radialGradient id="wheelHub" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#5a3c1c"/>
+              <stop offset="100%" stop-color="#1b0e05"/>
+            </radialGradient>
+            <radialGradient id="lanternGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(255,200,80,.85)"/>
+              <stop offset="60%" stop-color="rgba(255,160,40,.25)"/>
+              <stop offset="100%" stop-color="rgba(255,140,0,0)"/>
+            </radialGradient>
+          </defs>
+
+          <!-- horizon glow / haze -->
+          <ellipse cx="800" cy="560" rx="900" ry="60" fill="rgba(201,162,39,.08)"/>
+
+          <!-- LEFT RAILING -->
+          <g class="rail-group">
+            <!-- big post -->
+            <rect x="80" y="540" width="36" height="320" fill="url(#plankLight)" stroke="#1a0e07" stroke-width="2"/>
+            <rect x="68" y="528" width="60" height="18" fill="#7a4f24" stroke="#1a0e07" stroke-width="2"/>
+            <circle cx="98" cy="528" r="10" fill="url(#brass)" stroke="#1a0e07" stroke-width="1.5"/>
+            <!-- top rail -->
+            <rect x="116" y="572" width="380" height="16" fill="#7a4f24" stroke="#1a0e07" stroke-width="2"/>
+            <!-- balusters -->
+            <g fill="#4a2f17" stroke="#1a0e07" stroke-width="1.5">
+              <rect x="145" y="588" width="11" height="200"/>
+              <rect x="195" y="588" width="11" height="200"/>
+              <rect x="245" y="588" width="11" height="200"/>
+              <rect x="295" y="588" width="11" height="200"/>
+              <rect x="345" y="588" width="11" height="200"/>
+              <rect x="395" y="588" width="11" height="200"/>
+              <rect x="445" y="588" width="11" height="200"/>
+            </g>
+            <!-- bottom rail -->
+            <rect x="116" y="780" width="380" height="14" fill="#5e3a1c" stroke="#1a0e07" stroke-width="2"/>
+            <!-- hanging lantern -->
+            <line x1="200" y1="572" x2="200" y2="608" stroke="#222" stroke-width="2"/>
+            <circle cx="200" cy="640" r="40" fill="url(#lanternGlow)" class="lantern-glow"/>
+            <g transform="translate(200 630)">
+              <rect x="-14" y="-22" width="28" height="36" fill="#3a2913" stroke="url(#brass)" stroke-width="2" rx="2"/>
+              <rect x="-10" y="-18" width="20" height="28" fill="rgba(255,200,80,.85)"/>
+              <rect x="-16" y="-26" width="32" height="6" fill="url(#brass)"/>
+              <rect x="-16" y="14" width="32" height="6" fill="url(#brass)"/>
+            </g>
+          </g>
+
+          <!-- RIGHT RAILING (mirrored) -->
+          <g class="rail-group" transform="translate(1600 0) scale(-1 1)">
+            <rect x="80" y="540" width="36" height="320" fill="url(#plankLight)" stroke="#1a0e07" stroke-width="2"/>
+            <rect x="68" y="528" width="60" height="18" fill="#7a4f24" stroke="#1a0e07" stroke-width="2"/>
+            <circle cx="98" cy="528" r="10" fill="url(#brass)" stroke="#1a0e07" stroke-width="1.5"/>
+            <rect x="116" y="572" width="380" height="16" fill="#7a4f24" stroke="#1a0e07" stroke-width="2"/>
+            <g fill="#4a2f17" stroke="#1a0e07" stroke-width="1.5">
+              <rect x="145" y="588" width="11" height="200"/>
+              <rect x="195" y="588" width="11" height="200"/>
+              <rect x="245" y="588" width="11" height="200"/>
+              <rect x="295" y="588" width="11" height="200"/>
+              <rect x="345" y="588" width="11" height="200"/>
+              <rect x="395" y="588" width="11" height="200"/>
+              <rect x="445" y="588" width="11" height="200"/>
+            </g>
+            <rect x="116" y="780" width="380" height="14" fill="#5e3a1c" stroke="#1a0e07" stroke-width="2"/>
+          </g>
+
+          <!-- SHIP'S WHEEL (centered, behind the railing line) -->
+          <g class="wheel" transform="translate(800 660)">
+            <!-- spokes that extend beyond rim -->
+            <g stroke="#6e4a25" stroke-width="16" stroke-linecap="round">
+              <line x1="0" y1="-200" x2="0" y2="200"/>
+              <line x1="-200" y1="0" x2="200" y2="0"/>
+              <line transform="rotate(45)" x1="-200" y1="0" x2="200" y2="0"/>
+              <line transform="rotate(-45)" x1="-200" y1="0" x2="200" y2="0"/>
+            </g>
+            <!-- 8 handle pegs at spoke tips -->
+            <g fill="#3a2913" stroke="#1a0e07" stroke-width="2">
+              <rect x="-9" y="-210" width="18" height="34" rx="3"/>
+              <rect x="-9" y="176" width="18" height="34" rx="3"/>
+              <rect x="-210" y="-9" width="34" height="18" rx="3"/>
+              <rect x="176" y="-9" width="34" height="18" rx="3"/>
+              <g transform="rotate(45)"><rect x="-9" y="-210" width="18" height="34" rx="3"/><rect x="-9" y="176" width="18" height="34" rx="3"/></g>
+              <g transform="rotate(-45)"><rect x="-9" y="-210" width="18" height="34" rx="3"/><rect x="-9" y="176" width="18" height="34" rx="3"/></g>
+            </g>
+            <!-- wooden rim -->
+            <circle r="158" fill="none" stroke="#5e3a1c" stroke-width="28"/>
+            <!-- brass trim on rim -->
+            <circle r="172" fill="none" stroke="url(#brass)" stroke-width="3"/>
+            <circle r="144" fill="none" stroke="url(#brass)" stroke-width="3"/>
+            <!-- hub -->
+            <circle r="42" fill="url(#wheelHub)" stroke="url(#brass)" stroke-width="4"/>
+            <circle r="8" fill="url(#brass)"/>
+          </g>
+
+          <!-- FOREGROUND DECK PLANKS -->
+          <g class="planks">
+            <rect x="0" y="788" width="1600" height="112" fill="url(#plank)"/>
+            <!-- horizontal seams -->
+            <line x1="0" y1="810" x2="1600" y2="810" stroke="rgba(0,0,0,.6)" stroke-width="2"/>
+            <line x1="0" y1="850" x2="1600" y2="850" stroke="rgba(0,0,0,.5)" stroke-width="1.5"/>
+            <!-- vertical seams (planks) -->
+            <g stroke="rgba(0,0,0,.55)" stroke-width="1.5">
+              <line x1="120" y1="788" x2="120" y2="900"/>
+              <line x1="260" y1="788" x2="260" y2="900"/>
+              <line x1="410" y1="788" x2="410" y2="900"/>
+              <line x1="560" y1="788" x2="560" y2="900"/>
+              <line x1="720" y1="788" x2="720" y2="900"/>
+              <line x1="880" y1="788" x2="880" y2="900"/>
+              <line x1="1040" y1="788" x2="1040" y2="900"/>
+              <line x1="1190" y1="788" x2="1190" y2="900"/>
+              <line x1="1340" y1="788" x2="1340" y2="900"/>
+              <line x1="1480" y1="788" x2="1480" y2="900"/>
+            </g>
+            <!-- highlight along top edge -->
+            <rect x="0" y="788" width="1600" height="3" fill="rgba(255,210,140,.18)"/>
+          </g>
+
+          <!-- coiled rope, lower-left corner -->
+          <g transform="translate(220 830)" class="rope">
+            <ellipse cx="0" cy="0" rx="62" ry="20" fill="#1a0e07"/>
+            <ellipse cx="0" cy="-3" rx="58" ry="17" fill="none" stroke="#a87a3a" stroke-width="6"/>
+            <ellipse cx="0" cy="-6" rx="48" ry="14" fill="none" stroke="#c39448" stroke-width="6"/>
+            <ellipse cx="0" cy="-9" rx="36" ry="10" fill="none" stroke="#a87a3a" stroke-width="6"/>
+          </g>
         </svg>
       </div>
-      <div class="helm-plate">
-        <p class="eyebrow">— Logbook of a Steam-Age Privateer —</p>
-        <h1 class="captain-name" id="captainName"></h1>
-        <p class="captain-title" id="captainTitle"></p>
-        <p class="captain-port" id="captainPort"></p>
-        <div class="helm-cta">
-          <a href="#log" class="btn btn-brass">Open the Logbook</a>
-          <button id="fireBtn" class="btn btn-rust">🔥 Fire the Cannon</button>
+
+      <!-- floating hero card -->
+      <div class="hero-card">
+        <p class="eyebrow">— From the Deck —</p>
+        <h1 class="captain-name" id="captainName">Sushant Bisht</h1>
+        <p class="captain-title" id="captainTitle">Full-Stack Engineer · Builder · Explorer</p>
+        <p class="captain-port" id="captainPort">⚓ Bengaluru, India</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-brass">See the Voyages</a>
+          <a href="#contact" class="btn btn-ghost">Send a Signal</a>
         </div>
-        <p class="hint" id="cannonHint">find <strong>5</strong> hidden doubloons across the deck · <span id="dblCount">0</span>/5</p>
       </div>
-      <div class="scroll-cue" aria-hidden="true">▾ chart a course ▾</div>
+
+      <div class="scroll-cue" aria-hidden="true"><span>scroll the deck</span><span class="arrow">▾</span></div>
     </section>
 
-    <!-- ===== CAPTAIN'S LOG / ABOUT ===== -->
-    <section id="log" class="port reveal">
-      <header class="port-head"><span class="port-no">I</span><h2>Captain's Log</h2></header>
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="port reveal">
+      <header class="port-head">
+        <span class="port-no">01</span>
+        <h2>About the Captain</h2>
+        <span class="port-line"></span>
+      </header>
       <div class="parchment">
         <p class="creed" id="creed"></p>
         <div class="seal" aria-hidden="true">⚓</div>
       </div>
     </section>
 
-    <!-- ===== VOYAGES / EXPERIENCE ===== -->
-    <section id="voyages" class="port reveal">
-      <header class="port-head"><span class="port-no">II</span><h2>Voyages Undertaken</h2></header>
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience" class="port reveal">
+      <header class="port-head">
+        <span class="port-no">02</span>
+        <h2>Voyages — Experience</h2>
+        <span class="port-line"></span>
+      </header>
       <div class="voyages" id="voyages-list"></div>
     </section>
 
-    <!-- ===== BOUNTIES / PROJECTS ===== -->
-    <section id="bounties" class="port reveal">
-      <header class="port-head"><span class="port-no">III</span><h2>Bounties Claimed</h2></header>
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" class="port reveal">
+      <header class="port-head">
+        <span class="port-no">03</span>
+        <h2>Bounties — Projects</h2>
+        <span class="port-line"></span>
+      </header>
       <div class="bounties" id="bounties-list"></div>
     </section>
 
-    <!-- ===== ARSENAL / SKILLS ===== -->
-    <section id="arsenal" class="port reveal">
-      <header class="port-head"><span class="port-no">IV</span><h2>The Arsenal</h2></header>
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" class="port reveal">
+      <header class="port-head">
+        <span class="port-no">04</span>
+        <h2>The Arsenal — Skills</h2>
+        <span class="port-line"></span>
+      </header>
       <div class="arsenal" id="arsenal-list"></div>
     </section>
 
-    <!-- ===== THE HOLD: GALLERY + DISPATCHES (two columns) ===== -->
-    <section id="hold" class="port reveal">
-      <header class="port-head"><span class="port-no">V</span><h2>The Ship's Hold</h2></header>
+    <!-- ===== GALLERY + DISPATCHES ===== -->
+    <section id="log" class="port reveal">
+      <header class="port-head">
+        <span class="port-no">05</span>
+        <h2>The Ship's Log — Gallery &amp; Writing</h2>
+        <span class="port-line"></span>
+      </header>
       <div class="hold-grid">
-        <div class="hold-col gallery-col">
-          <h3 class="col-title">⌖ The Gallery</h3>
-          <p class="col-sub">A logbook of the journey — plates &amp; portraits.</p>
+        <div class="hold-col">
+          <h3 class="col-title">⌖ Gallery</h3>
+          <p class="col-sub">Snapshots from the journey.</p>
           <div class="gallery" id="gallery-list"></div>
         </div>
-        <div class="hold-col dispatch-col">
+        <div class="hold-col">
           <h3 class="col-title">✑ Dispatches</h3>
-          <p class="col-sub">Messages in bottles — writings from the deck.</p>
+          <p class="col-sub">Things I've been writing about.</p>
           <div class="dispatches" id="dispatch-list"></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== HAIL / CONTACT ===== -->
-    <section id="hail" class="port reveal">
-      <header class="port-head"><span class="port-no">VI</span><h2>Hail the Captain</h2></header>
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="port reveal">
+      <header class="port-head">
+        <span class="port-no">06</span>
+        <h2>Hail the Captain</h2>
+        <span class="port-line"></span>
+      </header>
       <div class="hail-box">
-        <p>Signal flags up. Send word by raven, wire, or telegraph.</p>
+        <p>Got an idea, a problem worth solving, or just want to say hi? I read every message.</p>
         <div class="hail-links" id="hail-links"></div>
       </div>
     </section>
 
     <footer class="footer">
-      <p>Charted &amp; rigged by the Captain · <span id="year"></span></p>
-      <p class="footer-tiny">Type <code>help</code> in the terminal below to issue orders.</p>
+      <p>Charted &amp; rigged by Sushant Bisht · <span id="year"></span></p>
     </footer>
   </main>
-
-  <!-- LIVE TERMINAL (mini text-adventure) -->
-  <div class="terminal-dock" id="termDock">
-    <button class="term-handle" id="termHandle">▣ ship's console</button>
-    <div class="terminal" id="terminal" aria-hidden="true">
-      <div class="term-body" id="termBody"></div>
-      <div class="term-input-row">
-        <span class="term-prompt">captain@deck:~$</span>
-        <input id="termInput" class="term-input" autocomplete="off" spellcheck="false" aria-label="terminal input" />
-      </div>
-    </div>
-  </div>
-
-  <!-- cannonball overlay -->
-  <div id="cannonLayer" class="cannon-layer" aria-hidden="true"></div>
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

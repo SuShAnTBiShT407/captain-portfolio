@@ -1,17 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
   <defs>
-    <radialGradient id="g3" cx="50%" cy="40%" r="70%">
-      <stop offset="0%" stop-color="#241608"/>
-      <stop offset="100%" stop-color="#070a0e"/>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a0e0a"/>
+      <stop offset="100%" stop-color="#2c1a09"/>
+    </linearGradient>
+    <radialGradient id="clockGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(208,90,60,.4)"/>
+      <stop offset="100%" stop-color="rgba(208,90,60,0)"/>
     </radialGradient>
-    <filter id="n3"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/>
-      <feColorMatrix type="saturate" values="0"/></filter>
   </defs>
-  <rect width="400" height="300" fill="url(#g3)"/>
-  <rect width="400" height="300" fill="#000" opacity="0.04" filter="url(#n3)"/>
-  <rect x="10" y="10" width="380" height="280" fill="none" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
-  <text x="200" y="150" font-size="120" text-anchor="middle" dominant-baseline="central" fill="#c9a227" opacity="0.85">🧭</text>
-  <text x="200" y="245" font-size="22" letter-spacing="3" text-anchor="middle" fill="#e9dab5" font-family="Georgia, serif">36-HOUR SIEGE</text>
-  <text x="28" y="40" font-size="26" fill="#b8482e" font-family="Georgia, serif">III</text>
-  <line x1="40" y1="262" x2="360" y2="262" stroke="#c9a227" stroke-width="0.8" opacity="0.4"/>
+  <rect width="400" height="300" fill="url(#bg3)"/>
+  <!-- ambient glow behind clock -->
+  <circle cx="280" cy="140" r="120" fill="url(#clockGlow)"/>
+  <!-- desk surface -->
+  <rect x="0" y="240" width="400" height="60" fill="#0a0604"/>
+  <line x1="0" y1="244" x2="400" y2="244" stroke="rgba(255,180,120,.1)" stroke-width="1"/>
+  <!-- sticky notes scattered -->
+  <g transform="translate(70 80) rotate(-8)">
+    <rect width="70" height="70" fill="#e6c25e" stroke="#a17b1d" stroke-width="1"/>
+    <line x1="10" y1="22" x2="60" y2="22" stroke="#7a5e0e" stroke-width="1"/>
+    <line x1="10" y1="34" x2="55" y2="34" stroke="#7a5e0e" stroke-width="1"/>
+    <line x1="10" y1="46" x2="50" y2="46" stroke="#7a5e0e" stroke-width="1"/>
+  </g>
+  <g transform="translate(40 160) rotate(6)">
+    <rect width="70" height="70" fill="#5fc7c2" stroke="#3a7c79" stroke-width="1"/>
+    <line x1="10" y1="22" x2="60" y2="22" stroke="#244a48" stroke-width="1"/>
+    <line x1="10" y1="34" x2="50" y2="34" stroke="#244a48" stroke-width="1"/>
+    <line x1="10" y1="46" x2="55" y2="46" stroke="#244a48" stroke-width="1"/>
+  </g>
+  <g transform="translate(130 180) rotate(-3)">
+    <rect width="64" height="64" fill="#d05a3c" stroke="#7a2c1c" stroke-width="1"/>
+    <line x1="8" y1="20" x2="56" y2="20" stroke="#4a1a10" stroke-width="1"/>
+    <line x1="8" y1="32" x2="48" y2="32" stroke="#4a1a10" stroke-width="1"/>
+  </g>
+  <!-- analog clock -->
+  <g transform="translate(280 140)">
+    <circle r="78" fill="#0a0604" stroke="#e6c25e" stroke-width="3"/>
+    <circle r="70" fill="#1a0e0a" stroke="#7a5e0e" stroke-width="1"/>
+    <!-- ticks -->
+    <g stroke="#e6c25e" stroke-width="2">
+      <line x1="0" y1="-66" x2="0" y2="-58"/>
+      <line x1="0" y1="58" x2="0" y2="66"/>
+      <line x1="-66" y1="0" x2="-58" y2="0"/>
+      <line x1="58" y1="0" x2="66" y2="0"/>
+    </g>
+    <g stroke="#a17b1d" stroke-width="1">
+      <line transform="rotate(30)" x1="0" y1="-66" x2="0" y2="-60"/>
+      <line transform="rotate(60)" x1="0" y1="-66" x2="0" y2="-60"/>
+      <line transform="rotate(120)" x1="0" y1="-66" x2="0" y2="-60"/>
+      <line transform="rotate(150)" x1="0" y1="-66" x2="0" y2="-60"/>
+      <line transform="rotate(210)" x1="0" y1="-66" x2="0" y2="-60"/>
+      <line transform="rotate(240)" x1="0" y1="-66" x2="0" y2="-60"/>
+      <line transform="rotate(300)" x1="0" y1="-66" x2="0" y2="-60"/>
+      <line transform="rotate(330)" x1="0" y1="-66" x2="0" y2="-60"/>
+    </g>
+    <!-- hands frozen near 3am -->
+    <line x1="0" y1="0" x2="0" y2="-50" stroke="#f3e6c3" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="38" y2="0" stroke="#f3e6c3" stroke-width="3" stroke-linecap="round" transform="rotate(15)"/>
+    <line x1="0" y1="0" x2="0" y2="-60" stroke="#d05a3c" stroke-width="1.5" stroke-linecap="round" transform="rotate(72)"/>
+    <circle r="4" fill="#e6c25e"/>
+  </g>
+  <text x="200" y="285" font-family="serif" font-size="11" letter-spacing="4" text-anchor="middle" fill="#cbb98c">36 HOURS · NO SLEEP</text>
+  <rect x="6" y="6" width="388" height="288" fill="none" stroke="rgba(230,194,94,.35)" stroke-width="1"/>
 </svg>

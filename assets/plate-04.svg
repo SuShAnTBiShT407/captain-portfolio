@@ -1,17 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
   <defs>
-    <radialGradient id="g4" cx="50%" cy="40%" r="70%">
-      <stop offset="0%" stop-color="#1c2330"/>
-      <stop offset="100%" stop-color="#070a0e"/>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1424"/>
+      <stop offset="100%" stop-color="#1a2c44"/>
+    </linearGradient>
+    <radialGradient id="heartGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(208,90,60,.5)"/>
+      <stop offset="100%" stop-color="rgba(208,90,60,0)"/>
     </radialGradient>
-    <filter id="n4"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/>
-      <feColorMatrix type="saturate" values="0"/></filter>
+    <linearGradient id="phone4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2c44"/>
+      <stop offset="100%" stop-color="#0a1424"/>
+    </linearGradient>
   </defs>
-  <rect width="400" height="300" fill="url(#g4)"/>
-  <rect width="400" height="300" fill="#000" opacity="0.04" filter="url(#n4)"/>
-  <rect x="10" y="10" width="380" height="280" fill="none" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
-  <text x="200" y="150" font-size="120" text-anchor="middle" dominant-baseline="central" fill="#c9a227" opacity="0.85">🩺</text>
-  <text x="200" y="245" font-size="22" letter-spacing="3" text-anchor="middle" fill="#e9dab5" font-family="Georgia, serif">AMREON LAUNCH</text>
-  <text x="28" y="40" font-size="26" fill="#b8482e" font-family="Georgia, serif">IV</text>
-  <line x1="40" y1="262" x2="360" y2="262" stroke="#c9a227" stroke-width="0.8" opacity="0.4"/>
+  <rect width="400" height="300" fill="url(#bg4)"/>
+  <!-- soft glow behind phone -->
+  <circle cx="200" cy="150" r="130" fill="url(#heartGlow)"/>
+  <!-- phone -->
+  <g transform="translate(200 150)">
+    <rect x="-60" y="-95" width="120" height="190" rx="14" fill="url(#phone4)" stroke="#e6c25e" stroke-width="2"/>
+    <rect x="-50" y="-80" width="100" height="160" rx="4" fill="#04080f"/>
+    <!-- status bar -->
+    <rect x="-50" y="-80" width="100" height="14" fill="#0a1424"/>
+    <circle cx="0" cy="-73" r="3" fill="#0d2236"/>
+    <!-- header -->
+    <text x="0" y="-58" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#cbb98c" font-weight="bold">AMREON</text>
+    <!-- heart icon -->
+    <g transform="translate(0 -28)">
+      <path d="M0 12 C -16 -2, -22 -16, -10 -22 C -4 -25, 0 -20, 0 -16 C 0 -20, 4 -25, 10 -22 C 22 -16, 16 -2, 0 12 Z" fill="#d05a3c" stroke="#7a2c1c" stroke-width="1"/>
+    </g>
+    <!-- ECG line under heart -->
+    <polyline points="-44,5 -30,5 -24,-6 -18,18 -10,-12 -4,5 4,5 12,-3 18,12 26,5 44,5"
+      fill="none" stroke="#5fc7c2" stroke-width="1.5"/>
+    <!-- stats blocks -->
+    <rect x="-44" y="20" width="42" height="22" rx="3" fill="#0d2236" stroke="rgba(95,199,194,.4)" stroke-width="1"/>
+    <text x="-23" y="32" font-family="sans-serif" font-size="6" text-anchor="middle" fill="#5fc7c2">STEPS</text>
+    <text x="-23" y="40" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#f3e6c3" font-weight="bold">8,420</text>
+    <rect x="2" y="20" width="42" height="22" rx="3" fill="#0d2236" stroke="rgba(230,194,94,.4)" stroke-width="1"/>
+    <text x="23" y="32" font-family="sans-serif" font-size="6" text-anchor="middle" fill="#e6c25e">SLEEP</text>
+    <text x="23" y="40" font-family="sans-serif" font-size="7" text-anchor="middle" fill="#f3e6c3" font-weight="bold">7h 12m</text>
+    <!-- mini chart -->
+    <polyline points="-44,68 -30,60 -16,64 -2,52 12,56 26,44 40,48"
+      fill="none" stroke="#e6c25e" stroke-width="1.5"/>
+    <line x1="-44" y1="74" x2="40" y2="74" stroke="rgba(243,230,195,.2)" stroke-width="0.5"/>
+    <!-- bottom dot -->
+    <rect x="-12" y="86" width="24" height="3" rx="1.5" fill="#cbb98c"/>
+  </g>
+  <text x="200" y="285" font-family="serif" font-size="11" letter-spacing="4" text-anchor="middle" fill="#cbb98c">AMREON · LAUNCH DAY</text>
+  <rect x="6" y="6" width="388" height="288" fill="none" stroke="rgba(230,194,94,.35)" stroke-width="1"/>
 </svg>
